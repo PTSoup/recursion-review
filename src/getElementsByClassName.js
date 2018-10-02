@@ -14,13 +14,14 @@ var getElementsByClassName = function(className) {
 // if className match with that element, add to results output
 // return the results output
   var output = [];
-  var node = node || document.body;
-  var searchNode = function() {
+  //var node = node || document.body;
+  var searchNode = function(node) {
     node = node || document.body;
-    for (var i = 0; i < node.childNodes.length; i++) {
-      if (node.childNodes[i].className && node.childNodes[i].className.toString().includes(className)) {
-        output.push(node.childNodes[i]);
-        if (node.childNodes[i].hasChildNodes()) {
+    for (var i = 0; i < node.children.length; i++) {
+      if (node.children[i].className && node.children[i].className.toString().includes(className)) {
+        output.push(node.children[i]);
+        if (node.children[i].hasChildNodes) {
+          console.log('running if statement');
           searchNode(node.children[i]);
         } else { 
           return false;
@@ -31,3 +32,4 @@ var getElementsByClassName = function(className) {
   searchNode();
   return output;
 };
+
