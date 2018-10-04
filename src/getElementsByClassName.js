@@ -9,46 +9,21 @@
 
 // getElementsbyClassName('class');
 
-var getElementsByClassName = function(className) { //=> 'class'
-// your code here
+var getElementsByClassName = function(className) {
+  var output = [];
 
-// iterate over document comprised of tags with classnames (nested)
-  // Evaluate if the element contains the given the className
-  // base case: 
-  // contains className
-  // then check to see if the element has children. 
-  // iterate over children of those nodes
-  // check to see if the child contains className
-  // if contains className, push to output
-  // if no children, end program and return output
-
-
-  var output = []; // [body.targetClassName]
-  //var node = node || document.body;
   var searchNode = function(node) {
-    node = node || document.body;
-    for (var i = 0; i < node.length; i++) {
-      if (node.className.toString().includes(className)) {
-        console.log('this code is accessible');
-        console.log(output);
-        output.push(node[i]); // node
-        // if (node.children[i].hasChildNodes)  {
-        //   console.log('running if statement');
-        //   searchNode(node.children[i]);
-        // } else { 
-        //   return false;
-        // }
-      } 
-    } 
+
+    node = node || document;
+    if (node.hasChildNodes()) {
+      for (var i = 0; i < node.childNodes.length; i++) {
+        if (String(node.childNodes[i].className).includes(className)) {
+          output.push(node.childNodes[i]);
+        }
+        searchNode(node.childNodes[i]);
+      }
+    }
   };
   searchNode();
   return output;
 };
-
-// output = [body.targetClassName, div.targetClassName]
-// body - targetClassName - > body.targetClassName
-  // div
-  // div - targetClassName -> div.targetClassName
-  // div
-  // div
-  // div
